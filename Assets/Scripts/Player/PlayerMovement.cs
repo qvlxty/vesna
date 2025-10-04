@@ -5,13 +5,9 @@ using Unity.Netcode;
 public class PlayerMovement : NetworkBehaviour
 {
     private PlayerInput playerInput;
-    public float movementSpeed = 20f;
-    
-    [SerializeField]
-    public CharacterController characterController;
-
+    [SerializeField] private float movementSpeed = 20f;
+    [SerializeField] private CharacterController characterController;
     public GameObject camera;
-
     private Vector2 _playerMov;
 
     void Start()
@@ -22,18 +18,18 @@ public class PlayerMovement : NetworkBehaviour
             camera.SetActive(false);
         }
     } 
+    
 
     void Update()
     {
-        // Можно управлять только своим игроком
         if (!IsOwner) return;
-        
-        _playerMov = this.playerInput.actions["Move"].ReadValue<Vector2>();
-        this.characterController.Move(new Vector3(
-            _playerMov.x,
-            0,
-            _playerMov.y
-        ) * (Time.deltaTime * movementSpeed));
+    
+        _playerMov = playerInput.actions["Move"].ReadValue<Vector2>();
+    
+        Vector3 move = new Vector3(_playerMov.x, 0, _playerMov.y) * movementSpeed;
+        characterController.Move(move * Time.deltaTime);
+    
+        // NetworkTransform автоматически синхронизирует позицию!
     }
     
 }
