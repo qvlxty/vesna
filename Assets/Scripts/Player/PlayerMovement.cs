@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     private PlayerInput playerInput;
     public float movementSpeed = 20f;
     
     [SerializeField]
     public CharacterController characterController;
-    
+
+    private Vector2 _playerMov;
+
     void Start()
     {
         this.playerInput = GetComponent<PlayerInput>();
@@ -17,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        var playerMov = this.playerInput.actions["Move"].ReadValue<Vector2>();
+        // Можно управлять только своим игроком
+        if (!IsOwner) return;
+        
+        _playerMov = this.playerInput.actions["Move"].ReadValue<Vector2>();
         this.characterController.Move(new Vector3(
-            playerMov.x,
+            _playerMov.x,
             0,
-            playerMov.y
+            _playerMov.y
         ) * (Time.deltaTime * movementSpeed));
     }
     
