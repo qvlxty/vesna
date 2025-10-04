@@ -10,11 +10,17 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     public CharacterController characterController;
 
+    public GameObject camera;
+
     private Vector2 _playerMov;
 
     void Start()
     {
         this.playerInput = GetComponent<PlayerInput>();
+        if (!IsOwner)
+        {
+            camera.SetActive(false);
+        }
     } 
 
     void Update()
