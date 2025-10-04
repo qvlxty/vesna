@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 382999868264864044}
   - component: {fileID: 9056893146021352244}
   - component: {fileID: 8991719848323077231}
-  - component: {fileID: 7138325590233642409}
+  - component: {fileID: 5937348761716223015}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -455,7 +455,7 @@ MonoBehaviour:
   movementSpeed: 20
   characterController: {fileID: 9117895565428461496}
   camera: {fileID: 5295675568078190517}
---- !u!114 &7138325590233642409
+--- !u!114 &5937348761716223015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,7 +480,7 @@ MonoBehaviour:
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 0
-  TickSyncChildren: 0
+  TickSyncChildren: 1
   UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
